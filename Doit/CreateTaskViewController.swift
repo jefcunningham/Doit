@@ -13,9 +13,6 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var importantSwitch: UISwitch!
     
-    // set up the previous view controller so I can send info over to it from here
-    var previousVC = TasksViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,16 +21,19 @@ class CreateTaskViewController: UIViewController {
 
     @IBAction func addTapped(_ sender: Any) {
         // create a task from the outlet information
-        let task = Task()
+        
+        // access the core data
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let task = Task(context: context)
+        
         task.name = taskNameTextField.text!
         task.important = importantSwitch.isOn
         
+        // save the core data
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
-        // add new task to the array in the other viewController
-        previousVC.tasks.append(task)
-        // you have to reload the tableview on the other viewController
-        previousVC.tableView.reloadData()
-        // animate back to the other viewController after pressing the button
+
+        // pop back
         navigationController?.popViewController(animated: true)
     }
     
