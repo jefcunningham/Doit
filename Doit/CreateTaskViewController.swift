@@ -13,6 +13,7 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var importantSwitch: UISwitch!
     
+    // set up the previous view controller so I can send info over to it from here
     var previousVC = TasksViewController()
     
     override func viewDidLoad() {
