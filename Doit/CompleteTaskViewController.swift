@@ -18,7 +18,7 @@ class CompleteTaskViewController: UIViewController {
         super.viewDidLoad()
 
         if task!.important {
-            taskLabel.text = "⚠️\(task!.name!)"
+            taskLabel.text = "⭐️ \(task!.name!)"
         } else {
             taskLabel.text = task!.name!
         }
